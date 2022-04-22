@@ -1,0 +1,8 @@
+name: NPCDestinationsQuests
+version: 1.0
+description: Quests module for NPCDestinations
+author: Browsit
+website: https://github.com/Browsit/NPCDestinationsQuestsModule
+
+main: org.browsit.npcdestinationsquests
+depend: [NPC_Destinations, Quests]
