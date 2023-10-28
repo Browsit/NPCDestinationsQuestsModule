@@ -1,6 +1,6 @@
 package org.browsit.npcdestinationsquests;
 
-import me.blackvein.quests.CustomReward;
+import me.pikamug.quests.module.BukkitCustomReward;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.livecar.nuttyworks.npc_destinations.DestinationsPlugin;
@@ -9,7 +9,6 @@ import net.livecar.nuttyworks.npc_destinations.citizens.NPCDestinationsTrait;
 import net.livecar.nuttyworks.npc_destinations.plugins.DestinationsAddon;
 import org.apache.commons.lang.math.NumberUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
-public class NPCDestinationsLocationReward extends CustomReward {
+public class NPCDestinationsLocationReward extends BukkitCustomReward {
 
     public NPCDestinationsLocationReward() {
         setName("NPC Destinations Location Reward");
@@ -29,7 +28,17 @@ public class NPCDestinationsLocationReward extends CustomReward {
     }
 
     @Override
-    public void giveReward(Player player, Map<String, Object> data) {
+    public String getModuleName() {
+        return NPCDestinationsModule.getModuleName();
+    }
+
+    @Override
+    public Map.Entry<String, Short> getModuleItem() {
+        return NPCDestinationsModule.getModuleItem();
+    }
+
+    @Override
+    public void giveReward(UUID uuid, Map<String, Object> data) {
         if (data != null && data.containsKey("NPC ID") && data.containsKey("Location ID")
                 && data.containsKey("Duration")) {
 

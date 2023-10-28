@@ -1,16 +1,16 @@
 package org.browsit.npcdestinationsquests;
 
-import me.blackvein.quests.CustomRequirement;
+import me.pikamug.quests.module.BukkitCustomRequirement;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.livecar.nuttyworks.npc_destinations.DestinationsPlugin;
 import net.livecar.nuttyworks.npc_destinations.citizens.NPCDestinationsTrait;
 import net.livecar.nuttyworks.npc_destinations.utilities.Utilities;
-import org.bukkit.entity.Player;
 
 import java.util.Map;
+import java.util.UUID;
 
-public class NPCDestinationsExactLocationRequirement extends CustomRequirement {
+public class NPCDestinationsExactLocationRequirement extends BukkitCustomRequirement {
 
     public NPCDestinationsExactLocationRequirement() {
         setName("NPC Destinations Exact Location Requirement");
@@ -22,7 +22,17 @@ public class NPCDestinationsExactLocationRequirement extends CustomRequirement {
     }
 
     @Override
-    public boolean testRequirement(Player player, Map<String, Object> data) {
+    public String getModuleName() {
+        return NPCDestinationsModule.getModuleName();
+    }
+
+    @Override
+    public Map.Entry<String, Short> getModuleItem() {
+        return NPCDestinationsModule.getModuleItem();
+    }
+
+    @Override
+    public boolean testRequirement(UUID uuid, Map<String, Object> data) {
         if (data != null && data.containsKey("NPC ID") && data.containsKey("Location ID")) {
 
             int npcID = -1;

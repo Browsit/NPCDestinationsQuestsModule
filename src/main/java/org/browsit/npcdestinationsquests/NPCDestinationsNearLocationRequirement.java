@@ -1,17 +1,16 @@
 package org.browsit.npcdestinationsquests;
 
-import me.blackvein.quests.CustomRequirement;
+import me.pikamug.quests.module.BukkitCustomRequirement;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.livecar.nuttyworks.npc_destinations.DestinationsPlugin;
 import net.livecar.nuttyworks.npc_destinations.citizens.NPCDestinationsTrait;
 import org.apache.commons.lang.math.NumberUtils;
-import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
 
-public class NPCDestinationsNearLocationRequirement extends CustomRequirement {
+public class NPCDestinationsNearLocationRequirement extends BukkitCustomRequirement {
 
     public NPCDestinationsNearLocationRequirement() {
         setName("NPC Destinations Near Location Requirement");
@@ -24,7 +23,17 @@ public class NPCDestinationsNearLocationRequirement extends CustomRequirement {
     }
 
     @Override
-    public boolean testRequirement(Player player, Map<String, Object> data) {
+    public String getModuleName() {
+        return NPCDestinationsModule.getModuleName();
+    }
+
+    @Override
+    public Map.Entry<String, Short> getModuleItem() {
+        return NPCDestinationsModule.getModuleItem();
+    }
+
+    @Override
+    public boolean testRequirement(UUID uuid, Map<String, Object> data) {
         if (data != null && data.containsKey("NPC ID") && data.containsKey("Location ID")
                 && data.containsKey("Max Distance")) {
 
